@@ -30,7 +30,7 @@ class MSSet(object):
 
     def get_vises(self, key='*.split.cal', lines=[]):
         self.mslist = glob.glob(key)
-        self.msdict = {'%i'%i: i for i in range(len(mslist))}
+        self.msdict = {'%i'%i: i for i in range(len(self.mslist))}
 
         for i, vis in enumerate(self.mslist):
             msmd.open(vis)
@@ -43,6 +43,7 @@ class MSSet(object):
             restfreqs = {'%i'%spw:
             msmd.restfreqs(trg_srcids[0], spw)['0']['m0'] for spw in spws
             }
+            msmd.done()
 
             _ms = MS(vis, fieldnames, spws, restfreqs, nspws, lines)
             self.msdict[i] = _ms
