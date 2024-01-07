@@ -23,11 +23,10 @@ class MS:
 
 
 class MSSet(object):
-    """docstring for VisSet"""
+    """docstring for MSSet"""
     def __init__(self, arg):
-        super(VisSet, self).__init__()
-        self.arg = arg
-        
+        super(MSSet, self).__init__()
+
 
     def get_vises(self, key='*.split.cal', lines=[]):
         self.mslist = glob.glob(key)
