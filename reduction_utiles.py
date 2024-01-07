@@ -80,3 +80,46 @@ class MSSet(object):
         concat(vis = outvises, concatvis = '_'.join(field, line) + '.ms')
         for vis in outvises:
             os.system('rm -r ' + vis)
+
+
+
+def get_vises():
+    mslist = glob.glob(key)
+    msdict = {'%i'%i: i for i in range(len(mslist))}
+
+    for i, vis in enumerate(mslist):
+        msmd.open(vis)
+        fieldnames = msmd.fieldnames()
+        #fieldids = msmd.fieldsforname
+        spws = msmd.spwsforintent('*TARGET*')
+        nspws = len(spws)
+        trg_fields = msmd.fieldsforintent('*TARGET*')
+        trg_srcids = [msmd.sourceidforfield(k) for k in trg_fields]
+        restfreqs = {'%i'%spw:
+        msmd.restfreqs(trg_srcids[0], spw)['0']['m0'] for spw in spws
+        }
+        msmd.done()
+
+        _ms = MS(vis, fieldnames, spws, restfreqs, nspws, lines)
+        msdict[i] = _ms
+        print(_ms)
+
+    return msdict
+
+
+def splitout(msdict, field = None, line = None):
+    outvises = []
+    for i in msdict.keys():
+        vis = msdict[i]['msname']
+        spws = msdict[i]['spws']
+        lines = msdict[i]['lines']
+        spw = np.array(spws)[np.array(lines) == line]
+
+        outputvis = '.'.join([vis, field, line])
+        split(vis, outputvis = '.'.join([vis, field, line]),
+            field=field, spw = spw)
+        outvises.append(outputvis)
+
+    concat(vis = outvises, concatvis = '_'.join(field, line) + '.ms')
+    for vis in outvises:
+        os.system('rm -r ' + vis)
