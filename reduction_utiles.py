@@ -24,7 +24,7 @@ class MS:
 
 class MSSet(object):
     """docstring for MSSet"""
-    def __init__(self, arg):
+    def __init__(self):
         super(MSSet, self).__init__()
 
 
