@@ -54,7 +54,7 @@ class MSSet(object):
         if type(lines[0]) == 'str':
             for i in self.msdict.keys():
                 ms = self.msdict[i]
-                setattr(_ms, 'lines', lines)
+                setattr(ms, 'lines', lines)
 
 
     def summary(self):
@@ -83,7 +83,7 @@ class MSSet(object):
 
 
 
-def get_vises():
+def get_vises(key = '*.split.cal', lines=[]):
     mslist = glob.glob(key)
     msdict = {'%i'%i: i for i in range(len(mslist))}
 
@@ -105,6 +105,13 @@ def get_vises():
         print(_ms)
 
     return msdict
+
+
+def add_lines(msdict, lines):
+    if type(lines[0]) == 'str':
+        for i in msdict.keys():
+            ms = msdict[i]
+            setattr(ms, 'lines', lines)
 
 
 def splitout(msdict, field = None, line = None):
