@@ -10,7 +10,7 @@ import numpy as np
 from dataclasses import dataclass, replace
 
 
-@dataclass(slots=True)
+@dataclass #(slots=True)
 class MS:
 
     msname: 'none'
