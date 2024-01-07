@@ -8,6 +8,7 @@ import glob
 import sys, os
 import numpy as np
 from dataclasses import dataclass, replace
+from casatools import msmetadata as msmd
 
 
 @dataclass #(slots=True)
