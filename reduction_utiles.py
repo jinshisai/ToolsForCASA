@@ -36,7 +36,7 @@ class MSSet(object):
 
         for i, vis in enumerate(self.mslist):
             print(vis)
-            msmd.open(vis)
+            _ = msmd.open(vis)
             fieldnames = msmd.fieldnames()
             #fieldids = msmd.fieldsforname
             spws = msmd.spwsforintent('*TARGET*')
@@ -46,7 +46,7 @@ class MSSet(object):
             restfreqs = {'%i'%spw:
             msmd.restfreqs(trg_srcids[0], spw)['0']['m0'] for spw in spws
             }
-            msmd.done()
+            _ = msmd.done()
 
             _ms = MS(vis, fieldnames, spws, restfreqs, nspws, lines)
             self.msdict[i] = _ms
