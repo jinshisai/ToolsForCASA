@@ -31,9 +31,11 @@ class MSSet(object):
 
     def get_vises(self, key='*.split.cal', lines=[]):
         self.mslist = glob.glob(key)
+        print(self.mslist)
         self.msdict = {'%i'%i: i for i in range(len(self.mslist))}
 
         for i, vis in enumerate(self.mslist):
+            print(vis)
             msmd.open(vis)
             fieldnames = msmd.fieldnames()
             #fieldids = msmd.fieldsforname
