@@ -8,7 +8,7 @@ import glob
 import sys, os
 import numpy as np
 from dataclasses import dataclass, replace
-from casatools import msmetadata as msmd
+msmd = casatools.msmetadata()
 
 
 @dataclass #(slots=True)
@@ -31,12 +31,13 @@ class MSSet(object):
 
     def get_vises(self, key='*.split.cal', lines=[]):
         self.mslist = glob.glob(key)
+        print('MS list:')
         print(self.mslist)
         self.msdict = {'%i'%i: i for i in range(len(self.mslist))}
 
         for i, vis in enumerate(self.mslist):
-            print(vis)
-            _ = msmd.open(vis)
+            #print(vis)
+            msmd.open(vis)
             fieldnames = msmd.fieldnames()
             #fieldids = msmd.fieldsforname
             spws = msmd.spwsforintent('*TARGET*')
@@ -46,7 +47,7 @@ class MSSet(object):
             restfreqs = {'%i'%spw:
             msmd.restfreqs(trg_srcids[0], spw)['0']['m0'] for spw in spws
             }
-            _ = msmd.done()
+            msmd.done()
 
             _ms = MS(vis, fieldnames, spws, restfreqs, nspws, lines)
             self.msdict[i] = _ms
