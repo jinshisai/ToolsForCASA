@@ -52,15 +52,19 @@ class MSSet(object):
             msmd.done()
 
             _ms = MS(vis, fieldnames, spws, restfreqs, nspws, lines)
-            self.msdict[i] = _ms
+            self.msdict['%i'%i] = _ms
             print(_ms)
 
 
     def add_lines(self, lines):
-        if type(lines[0]) == 'str':
+        if type(lines[0]) == str:
             for i in self.msdict.keys():
                 ms = self.msdict[i]
-                setattr(ms, 'lines', lines)
+                ms.lines = lines
+        elif type(lines[0]) == list:
+            for i, key in enumerate(self.msdict.keys()):
+                ms = self.msdict[key]
+                ms.lines = lines[i]
 
 
     def summary(self):
