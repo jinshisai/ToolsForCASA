@@ -8,6 +8,7 @@ import glob
 import sys, os
 import numpy as np
 from dataclasses import dataclass, replace
+import casatools
 msmd = casatools.msmetadata()
 
 
