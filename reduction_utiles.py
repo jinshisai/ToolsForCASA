@@ -74,7 +74,7 @@ class MSSet(object):
             print(ms)
 
 
-    def splitout(self, field = None, line = None):
+    def splitout(self, field = None, line = None, datacolumn = 'data'):
         vises = self.mslist
         outvises = []
         for i in self.msdict.keys():
@@ -85,8 +85,8 @@ class MSSet(object):
             spw = ','.join(spws_obj)
 
             outputvis = '.'.join([vis, field, line])
-            split(vis, outputvis = '.'.join([vis, field, line]),
-                field=field, spw = spw)
+            split(vis, outputvis = outputvis,
+                field=field, spw = spw, datacolumn = datacolumn)
             outvises.append(outputvis)
 
         concat(vis = outvises, concatvis = '_'.join(field, line) + '.ms')
