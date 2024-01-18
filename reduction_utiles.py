@@ -81,7 +81,8 @@ class MSSet(object):
             vis = self.msdict[i].msname
             spws = self.msdict[i].spws
             lines = self.msdict[i].lines
-            spw = np.array(spws)[np.array(lines) == line]
+            spws_obj = np.array(spws)[np.array(lines) == line].astype(str)
+            spw = ','.join(spws_obj)
 
             outputvis = '.'.join([vis, field, line])
             split(vis, outputvis = '.'.join([vis, field, line]),
