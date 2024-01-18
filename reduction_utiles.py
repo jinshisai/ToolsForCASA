@@ -25,8 +25,9 @@ class MS:
 
 class MSSet(object):
     """docstring for MSSet"""
-    def __init__(self):
+    def __init__(self, key='*.split.cal', lines=[]):
         super(MSSet, self).__init__()
+        self.get_vises(key, lines)
 
 
     def get_vises(self, key='*.split.cal', lines=[]):
