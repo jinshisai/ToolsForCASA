@@ -77,9 +77,9 @@ class MSSet(object):
         vises = self.mslist
         outvises = []
         for i in self.msdict.keys():
-            vis = self.msdict[i]['msname']
-            spws = self.msdict[i]['spws']
-            lines = self.msdict[i]['lines']
+            vis = self.msdict[i].msname
+            spws = self.msdict[i].spws
+            lines = self.msdict[i].lines
             spw = np.array(spws)[np.array(lines) == line]
 
             outputvis = '.'.join([vis, field, line])
